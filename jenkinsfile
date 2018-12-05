@@ -29,9 +29,11 @@ podTemplate(label:label,
 
         stage('LISTENER INGRESS'){
           container('kubectl') {
-            yaml.update file: 'ingress.yaml', update: ['.metadata.name': "${TENANT}-ingress", '.metadata.namespace': "${TENANT}", '.spec.rules[0].host': "${TENANT}.zmon.cloud", '.spec.rules[0].http.paths[0].backend.serviceName': "listener-${TENANT}"]
-            sh "cat ingress.yaml"
-            kubeCmd.apply file: 'ingress.yaml', namespace: ${TENANT}
+            withEnv(['KUBECONFIG=/var/config/menya-test/kube-config-zmon.yml']) {
+              yaml.update file: 'ingress.yaml', update: ['.metadata.name': "${TENANT}-ingress", '.metadata.namespace': "${TENANT}", '.spec.rules[0].host': "${TENANT}.zmon.cloud", '.spec.rules[0].http.paths[0].backend.serviceName': "listener-${TENANT}"]
+              sh "cat ingress.yaml"
+              kubeCmd.apply file: 'ingress.yaml', namespace: ${TENANT}
+            }
           }
         }
 
