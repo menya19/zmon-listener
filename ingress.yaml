@@ -2,8 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   generation: 1
-  name: dcsp-devops-ingress
-  namespace: dcsp-devops
+  name: ""
+  namespace: ""
 spec:
   rules:
   - host: dcsp-devops.zmon.cloud
