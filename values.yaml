@@ -73,7 +73,6 @@ config:
           - ""
         ##
         topic: "telegraf__"
-        topic: ""
         compression_codec: 0
         required_acks: -1
         max_retry: 3
