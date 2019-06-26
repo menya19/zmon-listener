@@ -30,7 +30,7 @@ podTemplate(label:label,
         stage('LISTENER INGRESS'){
           container('kubectl') {
             withEnv(['KUBECONFIG=/var/config/zmon/kube-config-zmon.yml']) {
-              sh "kubectl get secret star-zmon-cloud --namespace zmon --export -o yaml | kubectl apply --namespace=${TENANT} -f -l"
+              sh "kubectl get secret star-zmon-cloud --namespace zmon --export -o yaml | kubectl apply --namespace=${TENANT} -f -"
               yaml.update file: 'ingress.yaml', update: ['.metadata.name': "${TENANT}-ingress", '.metadata.namespace': "${TENANT}", '.spec.tls[0].host[0]': "${TENANT}.zmon.cloud", '.spec.rules[0].host': "${TENANT}.zmon.cloud", '.spec.rules[0].http.paths[0].backend.serviceName': "listener-${TENANT}"]
               sh "cat ingress.yaml"
               kubeCmd.apply file: 'ingress.yaml', namespace: TENANT
