@@ -5,11 +5,15 @@ metadata:
   name: ""
   namespace: ""
 spec:
+  tls:
+  - hosts:
+    - template.zmon.cloud
+  secretName: star-zmon-cloud
   rules:
-  - host: dcsp-devops.zmon.cloud
+  - host: template.zmon.cloud
     http:
       paths:
       - backend:
-          serviceName: listener-dcsp-devops
+          serviceName: listener-template-devops
           servicePort: 18080
         path: /
