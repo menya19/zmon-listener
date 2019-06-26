@@ -8,7 +8,7 @@ spec:
   tls:
   - hosts:
     - template.zmon.cloud
-  secretName: star-zmon-cloud
+    secretName: star-zmon-cloud
   rules:
   - host: template.zmon.cloud
     http:
